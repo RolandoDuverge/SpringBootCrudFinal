@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Editar carro</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">Editar carro</a>
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link"
+                                    th:href="@{/carros}">Control de carros</a></li>
+        </ul>
+    </div>
+</nav>
+
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class="text-center">Edición de estudiante</h1>
+            <div class="card-body">
+                <form th:action="@{/carros/{id}(id=${carro.id})}" th:object="${carro}" method="POST">
+
+                    <div class="form-group">
+                        <label>Marca : </label>
+                        <input type="text" name="marca" th:field="*{marca}" class="form-control" placeholder="Digite la marca" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Modelo : </label>
+                        <input type="text" name="modelo" th:field="*{modelo}" class="form-control" placeholder="Digite un modelo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descripción : </label>
+                        <input type="text" name="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Digite una breve descripción" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tipo de combustible : </label>
+                        <input type="text" name="tipo_Combustible" th:field="*{tipo_Combustible}" class="form-control" placeholder="Digite el tipo de combustible" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Número de chasis : </label>
+                        <input type="text" name="numero_de_Chasis" th:field="*{numero_de_Chasis}" class="form-control" placeholder="Digite el número de chasis" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Número de placa : </label>
+                        <input type="text" name="numero_de_Placa" th:field="*{numero_de_Placa}" class="form-control" placeholder="Digite el número de placa" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tipo de vehículo: </label>
+                        <input type="text" name="tipo_de_vehiculo" th:field="*{tipo_de_vehiculo}" class="form-control" placeholder="Digite el tipo de vehículo" required>
+                    </div>
+                    <div class="box-footer">
+                        <button class="btn btn-success">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

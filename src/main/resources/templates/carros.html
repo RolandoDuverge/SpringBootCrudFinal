@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Listado de carros</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand" href="#"> Control de carros</a>
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link"
+                                    th:href="@{/carros}">Control de carros</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="row">
+        <h1>Lista de carros</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <a th:href="@{/carros/nuevo}" class="btn btn-primary btn-sm mb3">Agregar carros</a>
+            <a th:href="@{/carros/export/excel}" class="btn btn-success btn-sm mb3">Exportar a Excel </a>
+        </div>
+    </div>
+    <br>
+    <div class="container text-center">
+        <form class="form-inline" th:action="@{/}">
+            <div class="form-group mb-2">
+                <label>Buscar:</label>
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+                <input type="text" name="palabraClave" class="form-control" id="palabraClave" th:value="${palabraClave}" placeholder="Digite para buscar">
+            </div>
+            <input type="submit" class="btn btn-primary mb-2" value="Buscar">
+            &nbsp;
+        </form>
+    </div>
+    <br>
+    <table class="table table-striped table-bordered">
+        <thead class="table-primary">
+        <tr>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Descripción</th>
+            <th>Tipo de combustible</th>
+            <th>Número de chasis</th>
+            <th>Número de placa</th>
+            <th>Tipo de vehículo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="carro : ${carros}">
+            <td th:text="${carro.modelo}">Modelo</td>
+            <td th:text="${carro.marca}">Marca</td>
+            <td th:text="${carro.descripcion}">Descripción</td>
+            <td th:text="${carro.tipo_Combustible}">Tipo de combustible</td>
+            <td th:text="${carro.numero_de_Chasis}">Número de chasis</td>
+            <td th:text="${carro.numero_de_Placa}">Número de placa</td>
+            <td th:text="${carro.tipo_de_vehiculo}">Tipo de vehículo</td>
+            <td>
+                <a th:href="@{/carros/editar/{id}(id=${carro.id})}" class="btn btn-info">Editar</a>
+                <a th:href="@{/carros/{id}(id=${carro.id})}" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
