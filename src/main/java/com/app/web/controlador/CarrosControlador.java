@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import com.app.web.excel.PdfExporter;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -36,6 +36,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.lowagie.text.DocumentException;
 
 
 @Controller
@@ -102,5 +103,22 @@ public class CarrosControlador {
         List<Carros> listCarro= servicio.listarTodosLosCarros();
         ExcelExporter excelExporter= new ExcelExporter(listCarro);
         excelExporter.export(response);
+    }
+
+    @GetMapping("/users/export/pdf")
+    public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException {
+        response.setContentType("application/pdf");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=users_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+
+        List<Carros> listaCarros = servicio.listarTodosLosCarros();
+
+        PdfExporter exporter = new PdfExporter(listaCarros);
+        exporter.export(response);
+
     }
 }
