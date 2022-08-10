@@ -62,7 +62,7 @@ public class CarrosControlador {
         @PostMapping("/carros")
         public String guardarCarro(@ModelAttribute("Carro") Carros Carro) {
             servicio.guardarCarro(Carro);
-            return "redirect:/carros";
+            return "redirect:/carros/nuevo";
         }
         @GetMapping("/carros/editar/{id}")
         public String mostrarFormularioDeEditar(@PathVariable Long id, Model modelo) {
@@ -132,34 +132,35 @@ public class CarrosControlador {
         FileInputStream fis=new FileInputStream("C:\\Users\\Rolando\\Desktop\\SpringBoot-Crud-Cars-main\\src\\excel\\CarrosForm.xlsx");
         XSSFWorkbook workbook=new XSSFWorkbook(fis);
         XSSFSheet sheet=workbook.getSheet("sheet");
-        int rowcount =sheet.getLastRowNum();
-        int colcount=sheet.getRow(1).getLastCellNum();
-        System.out.println("rowcount :"+rowcount+" colcount : "+colcount);
-        for (int i = 1; i < rowcount; i++) {
-            XSSFRow celldata=sheet.getRow(i);
+        int rowCount =sheet.getLastRowNum();
+        int colCount=sheet.getRow(1).getLastCellNum();
+        System.out.println("rowcount :"+rowCount+" colcount : "+colCount);
+        for (int i = 1; i < rowCount; i++) {
+            XSSFRow cellData=sheet.getRow(i);
 
-            String marca=celldata.getCell(0).getStringCellValue();
-            String modelo=celldata.getCell(1).getStringCellValue();
-            String descripcion=celldata.getCell(2).getStringCellValue();
-            String tipo_Combustible=celldata.getCell(3).getStringCellValue();
-            String numero_de_Chasis=celldata.getCell(4).getStringCellValue();
-            String numero_de_Placa=celldata.getCell(5).getStringCellValue();
-            String tipo_de_vehiculo=celldata.getCell(6).getStringCellValue();
+            String marca=cellData.getCell(0).getStringCellValue();
+            String modelo=cellData.getCell(1).getStringCellValue();
+            String descripcion=cellData.getCell(2).getStringCellValue();
+            String tipo_Combustible=cellData.getCell(3).getStringCellValue();
+            String numero_de_Chasis=cellData.getCell(4).getStringCellValue();
+            String numero_de_Placa=cellData.getCell(5).getStringCellValue();
+            String tipo_de_vehiculo=cellData.getCell(6).getStringCellValue();
 
-            driver.findElement(By.cssSelector("#marca")).sendKeys(marca);
             driver.findElement(By.cssSelector("#marca")).clear();
-            driver.findElement(By.cssSelector("#modelo")).sendKeys(modelo);
+            driver.findElement(By.cssSelector("#marca")).sendKeys(marca);
             driver.findElement(By.cssSelector("#modelo")).clear();
-            driver.findElement(By.cssSelector("#descripcion")).sendKeys(descripcion);
+            driver.findElement(By.cssSelector("#modelo")).sendKeys(modelo);
             driver.findElement(By.cssSelector("#descripcion")).clear();
-            driver.findElement(By.cssSelector("#tipo_Combustible")).sendKeys(tipo_Combustible);
+            driver.findElement(By.cssSelector("#descripcion")).sendKeys(descripcion);
             driver.findElement(By.cssSelector("#tipo_Combustible")).clear();
-            driver.findElement(By.cssSelector("#numero_de_Chasis")).sendKeys(numero_de_Chasis);
+            driver.findElement(By.cssSelector("#tipo_Combustible")).sendKeys(tipo_Combustible);
             driver.findElement(By.cssSelector("#numero_de_Chasis")).clear();
-            driver.findElement(By.cssSelector("#numero_de_Placa")).sendKeys(numero_de_Placa);
+            driver.findElement(By.cssSelector("#numero_de_Chasis")).sendKeys(numero_de_Chasis);
             driver.findElement(By.cssSelector("#numero_de_Placa")).clear();
-            driver.findElement(By.cssSelector("#tipo_de_vehiculo")).sendKeys(tipo_de_vehiculo);
+            driver.findElement(By.cssSelector("#numero_de_Placa")).sendKeys(numero_de_Placa);
             driver.findElement(By.cssSelector("#tipo_de_vehiculo")).clear();
+            driver.findElement(By.cssSelector("#tipo_de_vehiculo")).sendKeys(tipo_de_vehiculo);
+            driver.findElement(By.cssSelector("#submit")).click();
 
             System.out.println(i+"."+marca+" // " +modelo+" // "+descripcion+" // "+tipo_Combustible+" // "+numero_de_Chasis+" // "+numero_de_Placa+" // "+tipo_de_vehiculo);
         }
