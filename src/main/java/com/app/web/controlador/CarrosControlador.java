@@ -6,7 +6,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.apache.poi.ss.usermodel.Row;
 import com.app.web.entidad.Carros;
 import com.app.web.excel.ExcelExporter;
 import org.springframework.stereotype.Controller;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.app.web.excel.PdfExporter;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -34,8 +36,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+
 import com.lowagie.text.DocumentException;
-import testselenium.DriverFactory;
+
 
 
 @Controller
@@ -120,10 +123,12 @@ public class CarrosControlador {
         exporter.export(response);
     }
     @GetMapping("/users/data/import")
-    public void DatagettingFromExcel(HttpServletResponse response) throws DocumentException, IOException {
-        WebDriver driver=DriverFactory.getDriverFor("chrome");
+    public String DatagettingFromExcel() throws IOException {
+        File fileDriver = new File("D:\\Gecko\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", fileDriver.getAbsolutePath());
+        WebDriver driver =new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.get("http://localhost:8090/");
+        driver.get("http://localhost:8090/carros/nuevo");
         FileInputStream fis=new FileInputStream("C:\\Users\\Rolando\\Desktop\\SpringBoot-Crud-Cars-main\\src\\excel\\CarrosForm.xlsx");
         XSSFWorkbook workbook=new XSSFWorkbook(fis);
         XSSFSheet sheet=workbook.getSheet("sheet");
@@ -134,7 +139,7 @@ public class CarrosControlador {
             XSSFRow celldata=sheet.getRow(i);
 
             String marca=celldata.getCell(0).getStringCellValue();
-            String modelo= ((XSSFRow) celldata).getCell(1).getStringCellValue();
+            String modelo=celldata.getCell(1).getStringCellValue();
             String descripcion=celldata.getCell(2).getStringCellValue();
             String tipo_Combustible=celldata.getCell(3).getStringCellValue();
             String numero_de_Chasis=celldata.getCell(4).getStringCellValue();
@@ -158,5 +163,6 @@ public class CarrosControlador {
 
             System.out.println(i+"."+marca+" // " +modelo+" // "+descripcion+" // "+tipo_Combustible+" // "+numero_de_Chasis+" // "+numero_de_Placa+" // "+tipo_de_vehiculo);
         }
+        return "redirect:/carros/nuevo";
     }
 }
