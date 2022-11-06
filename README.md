@@ -1,2 +1,2 @@
 ﻿# SpringBootCrudFinal
-A simple crud with Springboot Java
+A simple crud using Springboot 
