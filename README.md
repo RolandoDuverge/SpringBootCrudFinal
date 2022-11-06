@@ -5,18 +5,19 @@ A simple crud using Springboot
 Aplicación utilizando Spring Boot, MySQL
 
 
-## Requirements
 
+ ## Built With ⚙️
+ 
 1. Java - 1.8.x
 2. Maven - 3.x.x
 3. Mysql - 5.x.x
 
-## SETUP
+### Setup
 
 1. Clone
 
 ```bash
-git clone https://github.com/yelken/springboot-crud.git
+git clone https://github.com/rduverge/crud-springboot
 ```
 
 **2. BD MySQL**
