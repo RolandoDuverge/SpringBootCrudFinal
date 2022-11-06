@@ -28,7 +28,7 @@ create database test_app
 
 + open `src/main/resources/application.properties`
 
-+ modify `spring.datasource.username` e `spring.datasource.password` de acordo com sua instalação
++ modify `spring.datasource.username` and `spring.datasource.password` according to your installation
 
 **4. Build**
 
