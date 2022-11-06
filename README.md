@@ -13,7 +13,7 @@ Aplicación utilizando Spring Boot, MySQL
 
 ## SETUP
 
-**1. Clone
+1. Clone
 
 ```bash
 git clone https://github.com/yelken/springboot-crud.git
